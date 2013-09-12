@@ -1,22 +1,24 @@
-var Db = require('mongodb').Db;
+var mongo = require('mongodb');
 var Connection = require('mongodb').Connection;
 var Server = require('mongodb').Server;
 var BSON = require('mongodb').BSON;
 var ObjectID = require('mongodb').ObjectID;
 
-appstore = function(host, port) {
-  this.db= new Db('node-mongo-demark', new Server(host, port, {auto_reconnect: true}, {}));
-  this.db.open(function(){});
-};
+var mongoUri = process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/mydb';
 
-appstore.prototype.getCollection= function(callback) {
-  this.db.collection('applications', function(error, apps_collection) {
-    if (error)
-	callback(error);
-    else
-	callback(null, apps_collection);
-  });
-};
+appstore.prototype.getCollection = function(callback) {
+    mongo.Db.connect(mongoUri, function(err,db) {
+	db.collection('applications', function(error, apps_collection) {
+	    if (error)
+		callback(error);
+	    else
+		callback(null, apps_collection);
+	});
+    });
+}
+
 
 
 appstore.prototype.all = function(callback) {
