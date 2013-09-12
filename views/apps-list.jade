@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    div.container
+      h2 Applications so far
+      for app in apps
+        p= app.firstname
+        p= app.lastname
+        p= app.email
+        p= app.aboutu
+        hr    

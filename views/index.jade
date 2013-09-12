@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div.jumbotron
+    div.container
+      h2= t('title')
+      p.lead= t('copyright')
+      form.form-inline(role='form', action="/", method="post")
+        div.form-group(style="padding: 10px;")
+          label.sr-only(for='firstname') First Name
+          input.form-control(type='text',id='firstname',name='firstname',placeholder=t('firstname'))
+        div.form-group(style="padding: 10px;")
+          label.sr-only(for='lastname') Last Name
+          input.form-control(type='text',id='lastname',name='lastname',placeholder=t('lastname'))
+        div.form-group(style="padding: 10px;")
+          label.sr-only(for='input_email') Email
+          input.form-control(type='email',id='email',name='email',placeholder=t('email'))
+        div.form-group(style="padding: 10px;")
+          textarea(class="input-sm form-control", rows="4",name='aboutu',placeholder=t('aboutu'))
+          p(style="font-size:60%"): span.help-block= t('aboutu-help')
+        div.form-group(style="padding: 10px;")
+          button(type='submit', class='btn btn-primary btn-lg')!= t('submit')
+  div.container
+    hr
+    footer: p. &copy; DeMark 2013
