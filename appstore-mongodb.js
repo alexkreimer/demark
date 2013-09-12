@@ -8,6 +8,8 @@ var mongoUri = process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
   'mongodb://localhost/mydb';
 
+appstore = function() {}
+
 appstore.prototype.getCollection = function(callback) {
     mongo.Db.connect(mongoUri, function(err,db) {
 	db.collection('applications', function(error, apps_collection) {
