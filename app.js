@@ -45,6 +45,10 @@ app.get('/', function(req, res){
     res.render('index.jade',{errors:{}});
 });
 
+app.get('/faq', function(req, res) {
+    res.render('faq.jade');
+});
+
 app.get('/thanks', function(req, res){
     res.render('thanks.jade');
 });
