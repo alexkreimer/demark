@@ -10,6 +10,7 @@
     "jade": "*",
     "stylus": "*",
     "mongodb": "1.1.11",
-    "i18next": "1.6.8"
+    "i18next": "1.6.8",
+    "express-validator": "0.8.0"
   }
 }

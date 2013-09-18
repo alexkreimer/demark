@@ -1,21 +1,29 @@
 extends layout
 
 block content
+  - var err = errors || {};
   div.jumbotron
     div.container
       h2= t('title')
       p.lead= t('copyright')
-      form.form-inline(role='form', action="/", method="post")
-        div.form-group(style="padding: 10px;")
-          label.sr-only(for='firstname') First Name
-          input.form-control(type='text',id='firstname',name='firstname',placeholder=t('firstname'))
-        div.form-group(style="padding: 10px;")
-          label.sr-only(for='lastname') Last Name
-          input.form-control(type='text',id='lastname',name='lastname',placeholder=t('lastname'))
-        div.form-group(style="padding: 10px;")
-          label.sr-only(for='input_email') Email
-          input.form-control(type='email',id='email',name='email',placeholder=t('email'))
-        div.form-group(style="padding: 10px;")
+      form.form-horizonal(role='form', action="/", method="post")
+        - var cls = (err.hasOwnProperty('firstname')) ? "form-group has-error" : "form-group";
+        div(class=cls)
+          label(class="control-label col-lg-2" for='firstname')= t('firstname') 
+          input(type='text',id='firstname',name='firstname', placeholder=t('firstname'))
+          span(class="help-block inline-help-block")= t('must_have_field')
+        - var cls = (err.hasOwnProperty('lastname')) ? "form-group has-error" : "form-group";
+        div(class=cls)
+          label(class="control-label col-lg-2" for='lastname')= t('lastname')
+          input(type='text',id='lastname',name='lastname', placeholder=t('lastname'))
+          span(class="help-block inline-help-block")= t('must_have_field')
+        - var cls = (err.hasOwnProperty('email')) ? "form-group has-error" : "form-group";
+        div(class=cls)
+          label(class="control-label col-lg-2" for='email')= t('email')
+          input(type='text',id='email',name='email', placeholder=t('email'))
+          span(class="help-block inline-help-block")= t('must_have_field')
+        div(class="form-group")
+          label(class="control-label" for='aboutu')= t('aboutu')
           textarea(class="input-sm form-control", rows="4",name='aboutu',placeholder=t('aboutu'))
           p(style="font-size:60%"): span.help-block= t('aboutu-help')
         div.form-group(style="padding: 10px;")

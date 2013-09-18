@@ -2,8 +2,11 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var i18n = require('i18next');
+var express = require('express'),
+    i18n = require('i18next'),
+    util = require('util'),
+    expressValidator = require('express-validator');
+
 
 i18n.init({saveMissing:true, debug:true});
 
@@ -13,11 +16,13 @@ var app = express();
 // Configuration
 
 app.configure(function(){
+    app.use(express.static(__dirname + '/public/bootstrap-3.0.0-dist'));
     app.use(i18n.handle);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.logger());
     app.use(express.bodyParser());
+    app.use(expressValidator());
     app.use(express.methodOverride());
     app.use(require('stylus').middleware({ src: __dirname + '/public' }));
     app.use(app.router);
@@ -37,7 +42,7 @@ app.configure('production', function(){
 var store = new appstore('localhost', 27017);
 
 app.get('/', function(req, res){
-    res.render('index.jade');
+    res.render('index.jade',{errors:{}});
 });
 
 app.get('/thanks', function(req, res){
@@ -45,6 +50,18 @@ app.get('/thanks', function(req, res){
 });
 
 app.post('/', function(req, res){
+    req.assert('firstname','is a must').notEmpty();
+    req.assert('lastname','is a must').notEmpty();
+    req.assert('email','needs to be a valid email').isEmail();
+
+    // true returns mapped errors, instead of a list
+    var errors = req.validationErrors(true);
+    console.log(errors);
+    if (errors) {
+	res.render('index.jade',{errors:errors});
+	return;
+    }
+
     store.save({
         firstname: req.body.firstname,
         lastname: req.body.lastname,

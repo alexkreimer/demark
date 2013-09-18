@@ -3,9 +3,16 @@ extends layout
 block content
     div.container
       h2 Applications so far
-      for app in apps
-        p= app.firstname
-        p= app.lastname
-        p= app.email
-        p= app.aboutu
-        hr    
+      table.table-responsive
+        table.table
+          tr
+            th= t('firstname')
+            th= t('lastname')
+            th= t('email')
+            th= t('about')
+          for app in apps
+            tr
+              td= app.firstname
+              td= app.lastname
+              td= app.email
+              td= app.aboutu
