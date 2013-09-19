@@ -26,9 +26,11 @@ html
             a(class='navbar-brand' href='/')= t('project')
           div(class='collapse navbar-collapse')
             ul(class='nav navbar-nav')
-              li.active
+              - home_active = (active=='home') ? 'active' : '';
+              - faq_active = (active=='faq') ? 'active' : '';
+              li(class=home_active)
                 a(href='/')= t('home')
-              li
+              li(class=faq_active)
                 a(href='/faq')= t('faq')
 
     block content

@@ -42,15 +42,15 @@ app.configure('production', function(){
 var store = new appstore('localhost', 27017);
 
 app.get('/', function(req, res){
-    res.render('index.jade',{errors:{}});
+    res.render('index.jade',{active:'home'});
 });
 
 app.get('/faq', function(req, res) {
-    res.render('faq.jade');
+    res.render('faq.jade',{active:'faq'});
 });
 
 app.get('/thanks', function(req, res){
-    res.render('thanks.jade');
+    res.render('thanks.jade',{active:'home'});
 });
 
 app.post('/', function(req, res){
@@ -62,7 +62,7 @@ app.post('/', function(req, res){
     var errors = req.validationErrors(true);
     console.log(errors);
     if (errors) {
-	res.render('index.jade',{errors:errors});
+	res.render('index.jade',{active:'home',errors:errors});
 	return;
     }
 

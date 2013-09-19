@@ -1,6 +1,7 @@
 extends layout
 
 block content
-  div.container
+  .jumbotron: .container
     h2.text-center= t('thanks')
-    p(class='text-success text-right')= t('thanks_note')
+    hr
+    p(class='text-success text-center')= t('thanks_note')
