@@ -3,17 +3,16 @@ extends layout
 block content
   div.jumbotron
     div.container
-      h2= t('faq_title')
+      h2.text-center= t('faq_title')
+      hr
       dl
         dt= t('faq1')
         .row: .col-md-offset-1: dd= t('faq1a')
-        dt= t('faq2')
-        .row: .col-md-offset-1: dd= t('faq2a')
+        dt= t('faq6')
+        .row: .col-md-offset-1: dd= t('faq6a')
         dt= t('faq3')
         .row: .col-md-offset-1: dd= t('faq3a')
         dt= t('faq4')
         .row: .col-md-offset-1: dd= t('faq4a')
         dt= t('faq5')
         .row: .col-md-offset-1: dd= t('faq5a')
-        dt= t('faq6')
-        .row: .col-md-offset-1: dd= t('faq6a')
